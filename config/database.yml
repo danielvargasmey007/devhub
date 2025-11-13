@@ -1,0 +1,12 @@
+# PostgreSQL configuration for DevHub
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: devhub_development
+  username: devhub
+  password: devhub
+  host: localhost

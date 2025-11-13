@@ -1,0 +1,54 @@
+<div class="admin-dashboard">
+  <h1>DevHub Admin Dashboard</h1>
+
+  <section class="recent-projects">
+    <h2>Recent Projects (Last 5)</h2>
+    <% if @recent_projects.any? %>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Created At</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @recent_projects.each do |project| %>
+            <tr>
+              <td><%= project.id %></td>
+              <td><%= project.name %></td>
+              <td><%= truncate(project.description, length: 100) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>No projects yet.</p>
+    <% end %>
+  </section>
+
+  <section class="task-statistics">
+    <h2>Task Counts by Status</h2>
+    <% if @task_counts.any? %>
+      <table>
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Count</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @task_counts.each do |status, count| %>
+            <tr>
+              <td><%= status.humanize %></td>
+              <td><%= count %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>No tasks yet.</p>
+    <% end %>
+  </section>
+</div>
