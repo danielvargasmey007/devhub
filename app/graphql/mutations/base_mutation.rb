@@ -1,0 +1,15 @@
+module Mutations
+  class BaseMutation < GraphQL::Schema::RelayClassicMutation
+    argument_class Types::BaseArgument
+    field_class Types::BaseField
+    input_object_class Types::BaseInputObject
+    object_class Types::BaseObject
+
+    # Common error handling helper
+    def execution_errors_from(service)
+      return [] unless service.respond_to?(:errors)
+
+      service.errors.full_messages
+    end
+  end
+end

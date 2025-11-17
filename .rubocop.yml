@@ -2,7 +2,9 @@
 inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 
 # Overwrite or add rules to create your own house style
-#
-# # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
-# Layout/SpaceInsideArrayLiteralBrackets:
-#   Enabled: false
+
+# Disable frozen string literal comment requirement
+# Ruby 3+ handles string freezing efficiently without the comment
+Style/FrozenStringLiteralComment:
+  Enabled: true
+  EnforcedStyle: never

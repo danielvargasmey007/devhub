@@ -14,19 +14,34 @@ module Core
       def call
         return false unless valid?
 
-        ActiveRecord::Base.transaction do
-          old_status = task.status
-          task.update!(status: new_status)
-          log_activity(old_status)
-        end
-
+        old_status = task.status
+        update_status
+        enqueue_activity_log(old_status)
         true
-      rescue ActiveRecord::RecordInvalid => e
-        @errors << e.message
+      rescue ActiveRecord::RecordInvalid, StandardError => e
+        handle_error(e)
         false
       end
 
       private
+
+      def update_status
+        ActiveRecord::Base.transaction do
+          task.update!(status: new_status)
+        end
+      end
+
+      def enqueue_activity_log(old_status)
+        # Enqueue background job to log activity asynchronously
+        # This happens AFTER the transaction commits successfully
+        ActivityLoggerJob.perform_later(task.id, old_status, new_status)
+      end
+
+      def handle_error(error)
+        error_message = error.message
+        Rails.logger.error("StatusUpdater failed: #{error_message}")
+        @errors << error_message
+      end
 
       def valid?
         unless task.present?
@@ -40,14 +55,6 @@ module Core
         end
 
         true
-      end
-
-      def log_activity(old_status)
-        ::Activity.create!(
-          record_type: task.class.name,
-          record_id: task.id,
-          action: "status_changed_from_#{old_status}_to_#{new_status}"
-        )
       end
     end
   end

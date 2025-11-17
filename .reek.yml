@@ -1,0 +1,63 @@
+---
+### Reek configuration for DevHub
+
+detectors:
+  # Disable IrresponsibleModule - not all classes need descriptive comments
+  # especially for GraphQL base classes and Rails framework classes
+  IrresponsibleModule:
+    enabled: false
+
+  # GraphQL resolvers are designed to be stateless utility functions
+  UtilityFunction:
+    enabled: false
+
+  # Allow 'e' for exception variables - this is a common Ruby convention
+  UncommunicativeVariableName:
+    enabled: true
+    accept:
+      - e
+      - g
+      - i
+      - j
+      - k
+
+  # Allow 'e' for exception parameters
+  UncommunicativeParameterName:
+    enabled: true
+    accept:
+      - e
+      - _
+
+  # GraphQL schema methods often have unused parameters due to framework requirements
+  UnusedParameters:
+    enabled: false
+
+  # Increase threshold for duplicate method calls
+  DuplicateMethodCall:
+    enabled: true
+    max_calls: 2
+
+  # Increase threshold for statement count - GraphQL mutations can be complex
+  TooManyStatements:
+    enabled: true
+    max_statements: 10
+
+  # Feature envy is acceptable for error handling and validation
+  FeatureEnvy:
+    enabled: false
+
+  # Nil checks are acceptable in Ruby
+  NilCheck:
+    enabled: false
+
+  # Manual dispatch is acceptable for metaprogramming
+  ManualDispatch:
+    enabled: false
+
+### Exclude certain directories
+exclude_paths:
+  - db/migrate
+  - vendor
+  - node_modules
+  - tmp
+  - bin

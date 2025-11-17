@@ -31,6 +31,9 @@ module Devhub
       #{config.root}/app/mutations
     ]
 
+    # Configure ActiveJob to use Sidekiq adapter
+    config.active_job.queue_adapter = :sidekiq
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
