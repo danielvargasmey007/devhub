@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  # Authentication routes
+  resources :users, only: [ :new, :create ]
+  resources :user_sessions, only: [ :new, :create, :destroy ]
+
+  # Named authentication routes for convenience
+  get "signup", to: "users#new", as: "signup"
+  get "login", to: "user_sessions#new", as: "login"
+  delete "logout", to: "user_sessions#destroy", as: "logout"
+
+  # Current user endpoint for future React integration
+  get "me", to: "users#me", as: "current_user"
+
   # Mount Admin engine at /admin
   mount Admin::Engine, at: "/admin"
 

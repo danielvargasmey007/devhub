@@ -1,5 +1,5 @@
 # Migration: Create activities table for audit trail
-class CreateActivities < ActiveRecord::Migration[8.1]
+class CreateActivities < ActiveRecord::Migration[8.0]
   def change
     create_table :activities do |t|
       t.references :record, polymorphic: true, null: false

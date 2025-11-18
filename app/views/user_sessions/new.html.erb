@@ -1,0 +1,30 @@
+<% content_for :title, "Log In - DevHub" %>
+
+<div style="max-width: 400px; margin: 50px auto; padding: 20px;">
+  <h1 style="margin-bottom: 20px;">Log In</h1>
+
+  <%= form_for @user_session, url: user_sessions_path do |f| %>
+    <div style="margin-bottom: 15px;">
+      <%= f.label :email, style: "display: block; margin-bottom: 5px; font-weight: bold;" %>
+      <%= f.email_field :email, autofocus: true, style: "width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" %>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <%= f.label :password, style: "display: block; margin-bottom: 5px; font-weight: bold;" %>
+      <%= f.password_field :password, style: "width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" %>
+    </div>
+
+    <div style="margin-bottom: 20px;">
+      <%= f.check_box :remember_me, style: "margin-right: 5px;" %>
+      <%= f.label :remember_me, "Remember me", style: "display: inline; font-weight: normal;" %>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <%= f.submit "Log In", style: "width: 100%; padding: 10px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;" %>
+    </div>
+  <% end %>
+
+  <p style="text-align: center; margin-top: 20px;">
+    Don't have an account? <%= link_to "Sign up", signup_path, style: "color: #007bff; text-decoration: none;" %>
+  </p>
+</div>

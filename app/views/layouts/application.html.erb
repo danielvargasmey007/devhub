@@ -23,6 +23,38 @@
   </head>
 
   <body>
+    <header style="background: #333; color: white; padding: 10px 20px; margin-bottom: 20px;">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <strong><%= link_to "DevHub", root_path, style: "color: white; text-decoration: none;" %></strong>
+        </div>
+        <nav>
+          <% if logged_in? %>
+            <span style="margin-right: 15px;">Logged in as <strong><%= current_user.name %></strong></span>
+            <% if current_user.admin? %>
+              <%= link_to "Admin", admin_path, style: "color: #ffd700; text-decoration: none; margin-right: 15px;" %>
+            <% end %>
+            <%= button_to "Logout", logout_path, method: :delete, style: "display: inline; background: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;" %>
+          <% else %>
+            <%= link_to "Login", login_path, style: "color: white; text-decoration: none; margin-right: 10px;" %>
+            <%= link_to "Sign Up", signup_path, style: "color: white; text-decoration: none;" %>
+          <% end %>
+        </nav>
+      </div>
+    </header>
+
+    <% if flash[:notice] %>
+      <div style="background: #d4edda; color: #155724; padding: 10px 20px; margin: 0 20px 20px; border: 1px solid #c3e6cb; border-radius: 4px;">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+
+    <% if flash[:alert] %>
+      <div style="background: #f8d7da; color: #721c24; padding: 10px 20px; margin: 0 20px 20px; border: 1px solid #f5c6cb; border-radius: 4px;">
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

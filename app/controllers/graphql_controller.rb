@@ -1,4 +1,7 @@
 class GraphqlController < ApplicationController
+  # Skip authentication in development for GraphiQL access
+  skip_before_action :require_user, if: -> { Rails.env.development? }
+
   # If accessing from outside this domain, nullify the session
   # This allows for outside API access while preventing CSRF attacks,
   # but you'll have to authenticate your user separately
@@ -8,7 +11,9 @@ class GraphqlController < ApplicationController
     variables = prepare_variables(params[:variables])
     query = params[:query]
     operation_name = params[:operationName]
-    context = {}
+    context = {
+      current_user: current_user
+    }
     result = DevhubSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
   rescue StandardError => e

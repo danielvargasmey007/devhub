@@ -1,8 +1,14 @@
-# User model with secure password authentication
+# User model with Authlogic authentication
 class User < ApplicationRecord
   self.record_timestamps = false
 
-  has_secure_password
+  # Authlogic authentication
+  acts_as_authentic do |c|
+    c.crypto_provider = ::Authlogic::CryptoProviders::SCrypt
+  end
+
+  # Add password confirmation virtual attribute
+  attr_accessor :password_confirmation
 
   # Associations
   has_many :tasks, as: :assignee, dependent: :nullify
@@ -10,5 +16,12 @@ class User < ApplicationRecord
   # Validations
   validates :name, presence: true
   validates :email, presence: true, uniqueness: { case_sensitive: false }
-  validates :password, length: { minimum: 6 }, if: -> { password.present? }
+  validates :password, confirmation: true, if: :password_required?
+  validates :password_confirmation, presence: true, if: :password_required?
+
+  private
+
+  def password_required?
+    crypted_password.blank? || password.present?
+  end
 end

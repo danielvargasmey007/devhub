@@ -1,4 +1,4 @@
-class RemoveTimestampsFromTasks < ActiveRecord::Migration[8.1]
+class RemoveTimestampsFromTasks < ActiveRecord::Migration[8.0]
   def change
     remove_column :tasks, :created_at, :datetime
     remove_column :tasks, :updated_at, :datetime

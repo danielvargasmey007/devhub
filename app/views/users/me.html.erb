@@ -1,0 +1,27 @@
+<% content_for :title, "My Profile - DevHub" %>
+
+<div style="max-width: 600px; margin: 50px auto; padding: 20px;">
+  <h1>My Profile</h1>
+
+  <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-top: 20px;">
+    <div style="margin-bottom: 15px;">
+      <strong>Name:</strong> <%= current_user.name %>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <strong>Email:</strong> <%= current_user.email %>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <strong>Role:</strong> <%= current_user.admin? ? "Administrator" : "User" %>
+    </div>
+
+    <div>
+      <strong>ID:</strong> <%= current_user.id %>
+    </div>
+  </div>
+
+  <p style="margin-top: 20px; color: #666;">
+    <small>This endpoint is ready for JSON responses when React integration is added.</small>
+  </p>
+</div>

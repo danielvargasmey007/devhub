@@ -1,5 +1,5 @@
 # Migration: Create tasks table with polymorphic assignee
-class CreateTasks < ActiveRecord::Migration[8.1]
+class CreateTasks < ActiveRecord::Migration[8.0]
   def change
     create_table :tasks do |t|
       t.string :title, null: false

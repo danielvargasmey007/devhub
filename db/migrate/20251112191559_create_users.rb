@@ -1,5 +1,5 @@
 # Migration: Create users table with authentication support
-class CreateUsers < ActiveRecord::Migration[8.1]
+class CreateUsers < ActiveRecord::Migration[8.0]
   def change
     create_table :users do |t|
       t.string :name, null: false

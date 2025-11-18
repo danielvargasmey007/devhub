@@ -11,28 +11,31 @@ User.destroy_all
 
 # Create Users
 puts "Creating users..."
-alice = User.create!(
+alice = User.new(
   name: "Alice Johnson",
   email: "alice@devhub.com",
-  password: "password123",
-  password_confirmation: "password123"
+  admin: true
 )
+alice.password = "password123"
+alice.save!
 
-bob = User.create!(
+bob = User.new(
   name: "Bob Smith",
   email: "bob@devhub.com",
-  password: "password123",
-  password_confirmation: "password123"
+  admin: false
 )
+bob.password = "password123"
+bob.save!
 
-charlie = User.create!(
+charlie = User.new(
   name: "Charlie Davis",
   email: "charlie@devhub.com",
-  password: "password123",
-  password_confirmation: "password123"
+  admin: false
 )
+charlie.password = "password123"
+charlie.save!
 
-puts "Created #{User.count} users"
+puts "Created #{User.count} users (#{User.where(admin: true).count} admin)"
 
 # Create Project
 puts "Creating project..."
@@ -86,12 +89,8 @@ task5 = Task.create!(
 
 puts "Created #{Task.count} tasks"
 
-# Create some activities using the service
-puts "Creating activity logs..."
-updater = TaskStatusUpdater.new(task1, :completed)
-updater.call
-
-puts "Created #{Activity.count} activities"
+# Note: Activity creation via TaskStatusUpdater service will be implemented later
+puts "Skipping activity logs for now"
 
 puts "\n✓ Seeding complete!"
 puts "  Users: #{User.count}"

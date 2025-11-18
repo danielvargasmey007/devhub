@@ -1,0 +1,47 @@
+<% content_for :title, "Sign Up - DevHub" %>
+
+<div style="max-width: 400px; margin: 50px auto; padding: 20px;">
+  <h1 style="margin-bottom: 20px;">Sign Up</h1>
+
+  <%= form_for @user, url: users_path do |f| %>
+    <% if @user.errors.any? %>
+      <div style="background: #fee; border: 1px solid #fcc; padding: 10px; margin-bottom: 20px; border-radius: 4px;">
+        <h3 style="margin-top: 0; color: #c00;">Please correct the following errors:</h3>
+        <ul style="margin-bottom: 0;">
+          <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div style="margin-bottom: 15px;">
+      <%= f.label :name, style: "display: block; margin-bottom: 5px; font-weight: bold;" %>
+      <%= f.text_field :name, autofocus: true, style: "width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" %>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <%= f.label :email, style: "display: block; margin-bottom: 5px; font-weight: bold;" %>
+      <%= f.email_field :email, style: "width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" %>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <%= f.label :password, style: "display: block; margin-bottom: 5px; font-weight: bold;" %>
+      <%= f.password_field :password, style: "width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" %>
+      <small style="color: #666;">Minimum 6 characters</small>
+    </div>
+
+    <div style="margin-bottom: 20px;">
+      <%= f.label :password_confirmation, "Confirm Password", style: "display: block; margin-bottom: 5px; font-weight: bold;" %>
+      <%= f.password_field :password_confirmation, style: "width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" %>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <%= f.submit "Sign Up", style: "width: 100%; padding: 10px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;" %>
+    </div>
+  <% end %>
+
+  <p style="text-align: center; margin-top: 20px;">
+    Already have an account? <%= link_to "Log in", login_path, style: "color: #007bff; text-decoration: none;" %>
+  </p>
+</div>
