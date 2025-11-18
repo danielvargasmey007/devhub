@@ -54,6 +54,15 @@ detectors:
   ManualDispatch:
     enabled: false
 
+  # Allow instance variable memoization pattern (Rails best practice)
+  InstanceVariableAssumption:
+    enabled: false
+
+  # Allow writable attributes for virtual password fields
+  Attribute:
+    exclude:
+      - User
+
 ### Exclude certain directories
 exclude_paths:
   - db/migrate

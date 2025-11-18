@@ -3,8 +3,8 @@ class User < ApplicationRecord
   self.record_timestamps = false
 
   # Authlogic authentication
-  acts_as_authentic do |c|
-    c.crypto_provider = ::Authlogic::CryptoProviders::SCrypt
+  acts_as_authentic do |config|
+    config.crypto_provider = ::Authlogic::CryptoProviders::SCrypt
   end
 
   # Add password confirmation virtual attribute
