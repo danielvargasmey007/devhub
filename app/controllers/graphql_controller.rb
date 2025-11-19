@@ -1,11 +1,10 @@
 class GraphqlController < ApplicationController
-  # Skip authentication in development for GraphiQL access
-  skip_before_action :require_user, if: -> { Rails.env.development? }
+  # Authentication is required for GraphQL API
+  # To use GraphiQL, you must be logged in through the Rails app
+  # skip_before_action :require_user, if: -> { Rails.env.development? }
 
-  # If accessing from outside this domain, nullify the session
-  # This allows for outside API access while preventing CSRF attacks,
-  # but you'll have to authenticate your user separately
-  # protect_from_forgery with: :null_session
+  # Skip CSRF verification for JSON API requests while keeping session intact
+  skip_before_action :verify_authenticity_token, if: -> { request.format.json? }
 
   def execute
     variables = prepare_variables(params[:variables])

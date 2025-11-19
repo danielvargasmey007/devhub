@@ -27,9 +27,19 @@ class ApplicationController < ActionController::Base
 
   def require_user
     unless logged_in?
-      store_location
-      flash[:alert] = "You must be logged in to access this page."
-      redirect_to main_app.login_path
+      respond_to do |format|
+        format.html do
+          store_location
+          flash[:alert] = "You must be logged in to access this page."
+          redirect_to main_app.login_path
+        end
+        format.json do
+          render json: { error: "Authentication required" }, status: :unauthorized
+        end
+        format.any do
+          render json: { error: "Authentication required" }, status: :unauthorized
+        end
+      end
     end
   end
 
