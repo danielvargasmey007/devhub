@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# bin/render-start
+# Free Tier: Runs migrations and starts Puma (no Sidekiq)
+# Jobs run inline to save memory
+
+set -e  # Exit immediately if a command exits with a non-zero status
+
+echo "========================================="
+echo "🚀 Starting Render deployment (Free Tier)"
+echo "========================================="
+
+# 1. Run database migrations
+echo ""
+echo "📦 Running database migrations..."
+bundle exec rails db:migrate
+
+# 2. Optional: Load seed data
+echo ""
+echo "🌱 Loading seed data..."
+bundle exec rails db:seed
+
+# 3. Start Puma in single-process mode (no workers)
+echo ""
+echo "🌐 Starting Puma web server (inline jobs)..."
+echo "Memory-optimized for Free Tier (512 MB)"
+echo "========================================="
+bundle exec puma -C config/puma.rb

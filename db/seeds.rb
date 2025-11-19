@@ -35,6 +35,15 @@ charlie = User.new(
 charlie.password = "password123"
 charlie.save!
 
+# Arkus Nexus admin
+arkus_admin = User.new(
+  name: "Leon Gil",
+  email: "lgil@arkusnexus.com",
+  admin: true
+)
+arkus_admin.password = "Arkus123*"
+arkus_admin.save!
+
 puts "Created #{User.count} users (#{User.where(admin: true).count} admin)"
 
 # Create Project

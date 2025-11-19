@@ -31,8 +31,10 @@ module Devhub
       #{config.root}/app/mutations
     ]
 
-    # Configure ActiveJob to use Sidekiq adapter
-    config.active_job.queue_adapter = :sidekiq
+    # Configure ActiveJob adapter based on environment
+    # For Free Tier: Use inline to avoid memory issues with Sidekiq
+    # For paid tiers: Set ACTIVE_JOB_ADAPTER=sidekiq
+    config.active_job.queue_adapter = ENV.fetch("ACTIVE_JOB_ADAPTER", "inline").to_sym
 
     # Configuration for the application, engines, and railties goes here.
     #

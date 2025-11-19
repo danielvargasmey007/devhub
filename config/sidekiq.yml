@@ -12,4 +12,4 @@ development:
   :concurrency: 2
 
 production:
-  :concurrency: 10
+  :concurrency: 2
