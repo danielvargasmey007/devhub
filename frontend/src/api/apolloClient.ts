@@ -1,8 +1,9 @@
 import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
+import { GRAPHQL_URL } from '../config';
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:3000/graphql',
-  credentials: 'include', // Important: Send cookies with requests
+  uri: GRAPHQL_URL,
+  credentials: 'include', // Send cookies with requests
 });
 
 export const apolloClient = new ApolloClient({

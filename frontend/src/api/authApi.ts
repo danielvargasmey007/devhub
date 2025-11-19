@@ -1,6 +1,5 @@
 import type { User, LoginCredentials, SignupData } from '../types';
-
-const API_BASE_URL = 'http://localhost:3000';
+import { API_BASE_URL } from '../config';
 
 // Helper to handle fetch responses
 async function handleResponse<T>(response: Response): Promise<T> {
