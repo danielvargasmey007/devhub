@@ -1,11 +1,21 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  email: MyString
-  password_digest: MyString
+  name: Regular User
+  email: user@example.com
+  crypted_password: $s1$f0801$gd8FSVSXqMDn5MmvmV4y1z6vH9oOMqJlKcbF4pMrsPo= # "password"
+  password_salt:
+  persistence_token: <%= SecureRandom.hex(50) %>
+  single_access_token: <%= SecureRandom.hex(50) %>
+  perishable_token: <%= SecureRandom.hex(50) %>
+  admin: false
 
 two:
-  name: MyString
-  email: MyString
-  password_digest: MyString
+  name: Admin User
+  email: admin@example.com
+  crypted_password: $s1$f0801$gd8FSVSXqMDn5MmvmV4y1z6vH9oOMqJlKcbF4pMrsPo= # "password"
+  password_salt:
+  persistence_token: <%= SecureRandom.hex(50) %>
+  single_access_token: <%= SecureRandom.hex(50) %>
+  perishable_token: <%= SecureRandom.hex(50) %>
+  admin: true

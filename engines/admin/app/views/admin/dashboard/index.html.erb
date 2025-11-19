@@ -41,7 +41,7 @@
         <tbody>
           <% @task_counts.each do |status, count| %>
             <tr>
-              <td><%= status.humanize %></td>
+              <td><%= status&.humanize || 'Unknown' %></td>
               <td><%= count %></td>
             </tr>
           <% end %>

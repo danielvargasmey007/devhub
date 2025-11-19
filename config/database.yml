@@ -10,3 +10,17 @@ development:
   username: devhub
   password: devhub
   host: localhost
+
+test:
+  <<: *default
+  database: devhub_test
+  username: devhub
+  password: devhub
+  host: localhost
+
+production:
+  <<: *default
+  database: devhub_production
+  username: devhub
+  password: <%= ENV["DEVHUB_DATABASE_PASSWORD"] %>
+  host: localhost
