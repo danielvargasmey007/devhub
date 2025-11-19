@@ -58,7 +58,7 @@ Rails.application.configure do
 
   # Set host to be used by links generated in mailer templates.
   config.action_mailer.default_url_options = {
-    host: ENV.fetch("BACKEND_HOST", "devhub-backend.onrender.com"),
+    host: ENV.fetch("BACKEND_HOST", "devhub-backend-htdu.onrender.com"),
     protocol: 'https'
   }
 
@@ -84,7 +84,7 @@ Rails.application.configure do
   # Configure allowed hosts for Render
   # This prevents DNS rebinding attacks
   config.hosts = [
-    ENV.fetch("BACKEND_HOST", "devhub-backend.onrender.com"),
+    ENV.fetch("BACKEND_HOST", "devhub-backend-htdu.onrender.com"),
     /.*\.onrender\.com/  # Allow all Render domains
   ]
 

@@ -18,7 +18,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
   if Rails.env.production?
     allow do
       # Set this via environment variable or update with your actual frontend URL
-      origins ENV.fetch("FRONTEND_URL", "https://devhub-frontend.onrender.com")
+      origins ENV.fetch("FRONTEND_URL", "https://devhub-frontend-j6yg.onrender.com")
 
       resource "*",
         headers: :any,
