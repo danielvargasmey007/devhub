@@ -49,11 +49,18 @@ export const SignupPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-navy-900 via-navy-800 to-accent-900 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-navy-900 via-navy-800 to-primary-900 py-12 px-4 sm:px-6 lg:px-8">
       <Card className="max-w-md w-full space-y-8">
         <div>
+          <div className="flex justify-center mb-6">
+            <img
+              src="/images/arkus-logo.webp"
+              alt="Arkus Nexus"
+              className="h-12 w-auto"
+            />
+          </div>
           <h2 className="text-center text-4xl font-extrabold text-gray-900">
-            Join <span className="text-accent-500">DevHub</span>
+            Join <span className="text-primary-500">DevHub</span>
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
             Create your account to get started
@@ -125,7 +132,7 @@ export const SignupPage: React.FC = () => {
               Already have an account?{' '}
               <Link
                 to="/login"
-                className="font-medium text-accent-600 hover:text-accent-500"
+                className="font-medium text-primary-600 hover:text-primary-500"
               >
                 Sign in here
               </Link>

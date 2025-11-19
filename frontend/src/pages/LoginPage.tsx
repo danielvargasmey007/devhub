@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '../store';
 import { login, clearError } from '../store/authSlice';
@@ -51,11 +51,11 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-navy-900 via-navy-800 to-accent-900 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-navy-900 via-navy-800 to-primary-900 py-12 px-4 sm:px-6 lg:px-8">
       <Card className="max-w-md w-full space-y-8">
         <div>
-          <h2 className="text-center text-4xl font-extrabold text-gray-900">
-            Welcome to <span className="text-accent-500">DevHub</span>
+          <h2 className="text-center text-4xl font-extrabold text-gray-900 mb-35">
+            Welcome to <span className="text-primary-500">DevHub</span>
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
             Sign in to your account
@@ -65,12 +65,12 @@ export const LoginPage: React.FC = () => {
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="space-y-4">
             <FormField
-              label="Email Address"
+              label="Email"
               type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="you@example.com"
+              placeholder="you@arkusnexus.com"
               required
             />
 
@@ -85,7 +85,7 @@ export const LoginPage: React.FC = () => {
             />
           </div>
 
-          <div>
+          <div className="mb-20">
             <Button
               type="submit"
               variant="primary"
@@ -96,16 +96,17 @@ export const LoginPage: React.FC = () => {
             </Button>
           </div>
 
-          <div className="text-center">
-            <p className="text-sm text-gray-600">
-              Don't have an account?{' '}
-              <Link
-                to="/signup"
-                className="font-medium text-accent-600 hover:text-accent-500"
-              >
-                Sign up here
-              </Link>
-            </p>
+          <div className="text-center mt-8">
+              <p className="mt-11 text-center text-sm text-gray-600">
+                  Made with Love for
+              </p>
+              <div className="flex justify-center">
+                  <img
+                      src="/images/arkus-logo.webp"
+                      alt="Arkus Nexus"
+                      className="h-4 w-auto"
+                  />
+              </div>
           </div>
         </form>
       </Card>

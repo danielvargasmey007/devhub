@@ -59,7 +59,7 @@ export const ProjectsListPage: React.FC = () => {
       <Layout>
         <div className="flex items-center justify-center min-h-96">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-500 mx-auto"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500 mx-auto"></div>
             <p className="mt-4 text-gray-600">Loading projects...</p>
           </div>
         </div>
@@ -122,7 +122,7 @@ export const ProjectsListPage: React.FC = () => {
                   <span className="text-gray-500">
                     {project.tasks?.length || 0} tasks
                   </span>
-                  <span className="text-accent-600 font-medium">
+                  <span className="text-primary-600 font-medium">
                     View Details →
                   </span>
                 </div>
