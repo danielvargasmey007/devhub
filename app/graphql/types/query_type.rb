@@ -44,5 +44,14 @@ module Types
     def task(id:)
       Task.includes(:project, :assignee).find_by(id: id)
     end
+
+    # ===== USER QUERIES =====
+
+    field :users, [ Types::UserType ], null: false,
+      description: "Get all users"
+
+    def users
+      User.all.order(:name)
+    end
   end
 end

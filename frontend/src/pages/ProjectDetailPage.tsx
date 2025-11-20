@@ -153,7 +153,7 @@ export const ProjectDetailPage: React.FC = () => {
       title: task.title,
       description: task.description || '',
       status: task.status,
-      assigneeId: task.assignee?.id || '',
+      assigneeId: task.assignee?.id ? String(task.assignee.id) : '',
     });
     setIsEditModalOpen(true);
   };

@@ -12,7 +12,25 @@ module Core
       end
 
       def call
+        # Handle assignee assignment (polymorphic association)
+        assignee = nil
+        if @task_params[:assignee_id].present?
+          assignee_type = @task_params.delete(:assignee_type) || 'User'
+          assignee_id = @task_params.delete(:assignee_id)
+
+          assignee = assignee_type.constantize.find_by(id: assignee_id)
+          unless assignee
+            @errors << "#{assignee_type} not found with ID: #{assignee_id}"
+            return false
+          end
+        else
+          # Remove assignee keys if not present
+          @task_params.delete(:assignee_id)
+          @task_params.delete(:assignee_type)
+        end
+
         @task = @project.tasks.build(@task_params)
+        @task.assignee = assignee if assignee
 
         if @task.save
           log_activity
