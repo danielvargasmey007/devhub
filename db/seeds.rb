@@ -17,6 +17,7 @@ alice = User.new(
   admin: true
 )
 alice.password = "password123"
+alice.password_confirmation = "password123"
 alice.save!
 
 bob = User.new(
@@ -25,6 +26,7 @@ bob = User.new(
   admin: false
 )
 bob.password = "password123"
+bob.password_confirmation = "password123"
 bob.save!
 
 charlie = User.new(
@@ -33,6 +35,7 @@ charlie = User.new(
   admin: false
 )
 charlie.password = "password123"
+charlie.password_confirmation = "password123"
 charlie.save!
 
 # Arkus Nexus admin
@@ -42,6 +45,7 @@ arkus_admin = User.new(
   admin: true
 )
 arkus_admin.password = "Arkus123*"
+arkus_admin.password_confirmation = "Arkus123*"
 arkus_admin.save!
 
 puts "Created #{User.count} users (#{User.where(admin: true).count} admin)"

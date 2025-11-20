@@ -6,7 +6,7 @@
 set -e  # Exit immediately if a command exits with a non-zero status
 
 echo "========================================="
-echo "🚀 Starting Render deployment (Free Tier)"
+echo "🚀 Starting Render deployment (Free Tier).."
 echo "========================================="
 
 # 1. Run database migrations
