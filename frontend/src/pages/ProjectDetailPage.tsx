@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client/react';
-import { GET_PROJECT } from '../graphql/queries';
+import { GET_PROJECT, GET_USERS } from '../graphql/queries';
 import { CREATE_TASK, UPDATE_TASK, UPDATE_TASK_STATUS } from '../graphql/mutations';
 import { Layout } from '../components/Layout';
 import { Card } from '../components/Card';
@@ -10,7 +10,7 @@ import { Modal } from '../components/Modal';
 import { FormField } from '../components/FormField';
 import { useIsAdmin } from '../hooks/useIsAdmin';
 import { TaskStatus } from '../types';
-import type { Task, TaskFormData, Project } from '../types';
+import type { Task, TaskFormData, Project, User } from '../types';
 
 const STATUS_COLORS = {
   PENDING: 'bg-gray-100 text-gray-800',
@@ -43,6 +43,9 @@ export const ProjectDetailPage: React.FC = () => {
   const { loading, error, data, refetch } = useQuery<{ project: Project }>(GET_PROJECT, {
     variables: { id },
   });
+
+  const { data: usersData } = useQuery<{ users: User[] }>(GET_USERS);
+  const users = usersData?.users || [];
 
   const [createTask, { loading: creating }] = useMutation<{ createTask: { task: Task | null; errors: string[] } }>(CREATE_TASK);
   const [updateTask, { loading: updating }] = useMutation<{ updateTask: { task: Task | null; errors: string[] } }>(UPDATE_TASK);
@@ -150,6 +153,7 @@ export const ProjectDetailPage: React.FC = () => {
       title: task.title,
       description: task.description || '',
       status: task.status,
+      assigneeId: task.assignee?.id || '',
     });
     setIsEditModalOpen(true);
   };
@@ -301,6 +305,21 @@ export const ProjectDetailPage: React.FC = () => {
               <option value={TaskStatus.ARCHIVED}>Archived</option>
             </FormField>
 
+            <FormField
+              label="Assign To"
+              name="assigneeId"
+              value={createFormData.assigneeId || ''}
+              onChange={handleCreateChange}
+              as="select"
+            >
+              <option value="">Unassigned</option>
+              {users.map((user) => (
+                <option key={user.id} value={user.id}>
+                  {user.name} ({user.email})
+                </option>
+              ))}
+            </FormField>
+
             <div className="flex justify-end space-x-3 mt-6">
               <Button
                 type="button"
@@ -353,6 +372,21 @@ export const ProjectDetailPage: React.FC = () => {
               <option value={TaskStatus.IN_PROGRESS}>In Progress</option>
               <option value={TaskStatus.COMPLETED}>Completed</option>
               <option value={TaskStatus.ARCHIVED}>Archived</option>
+            </FormField>
+
+            <FormField
+              label="Assign To"
+              name="assigneeId"
+              value={editFormData.assigneeId || ''}
+              onChange={handleEditChange}
+              as="select"
+            >
+              <option value="">Unassigned</option>
+              {users.map((user) => (
+                <option key={user.id} value={user.id}>
+                  {user.name} ({user.email})
+                </option>
+              ))}
             </FormField>
 
             <div className="flex justify-end space-x-3 mt-6">
